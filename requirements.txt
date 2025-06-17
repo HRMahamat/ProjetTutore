@@ -3,6 +3,5 @@ pandas
 plotly
 numpy
 pillow
-scikit-learn
 tensorflow==2.18.0
 zipfile
