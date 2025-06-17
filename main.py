@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 from PIL import Image
-from sklearn.metrics import classification_report, confusion_matrix
 import tensorflow as tf
 
 
