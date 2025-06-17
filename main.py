@@ -36,7 +36,7 @@ if not os.path.exists(LOCAL_MODEL_PATH):
     r.raise_for_status()
     with open(LOCAL_MODEL_PATH, "wb") as f:
         for chunk in r.iter_content(1024 * 1024): f.write(chunk)
-model = tf.keras.models.load_model(LOCAL_MODEL_PATH)
+model = tf.keras.models.load_model(MODEL_URL)
   
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
