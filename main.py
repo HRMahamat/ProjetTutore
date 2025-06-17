@@ -1,4 +1,4 @@
-import os, time, zipfile
+import os, time, request
 import streamlit as st
 import numpy as np
 import pandas as pd
