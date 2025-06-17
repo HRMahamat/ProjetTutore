@@ -29,15 +29,14 @@ img = (224, 224)
 CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis', 'DrugEruption', 'Eczema', 'Infestations_Bites', 'Lichen', 'Lupus', 'Moles', 'Psoriasis', 'Rosacea', 'Seborrh_Keratoses', 'SkinCancer', 'Sun_Sunlight_Damage', 'Tinea', 'Unknown_Normal', 'Vascular_Tumors', 'Vasculitis', 'Vitiligo', 'Warts']
 
 # Charge modèle + historique
-LOCAL_MODEL = "Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
-if not os.path.exists(LOCAL_MODEL):
-        with st.spinner("Téléchargement du modèle…"):
-            resp = requests.get("https://drive.google.com/uc?export=download&id=1zPPtgKxvW1ErfevKvAeSMHmq6-Ine9CU", stream=True)
-            resp.raise_for_status()
-            with open(LOCAL_MODEL, "wb") as f:
-                for chunk in resp.iter_content(chunk_size=1024*1024): f.write(chunk)
-
-with st.spinner("Chargement du modèle…"): model = tf.keras.models.load_model(LOCAL_MODEL)
+MODEL_URL = "https://drive.google.com/file/d/1zPPtgKxvW1ErfevKvAeSMHmq6-Ine9CU/view?usp=sharing"
+LOCAL_MODEL_PATH = "Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
+if not os.path.exists(LOCAL_MODEL_PATH):
+    r = requests.get(MODEL_URL, stream=True)
+    r.raise_for_status()
+    with open(LOCAL_MODEL_PATH, "wb") as f:
+        for chunk in r.iter_content(1024 * 1024): f.write(chunk)
+model = tf.keras.models.load_model(LOCAL_MODEL_PATH)
   
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
