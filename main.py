@@ -29,7 +29,7 @@ img = (224, 224)
 CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis', 'DrugEruption', 'Eczema', 'Infestations_Bites', 'Lichen', 'Lupus', 'Moles', 'Psoriasis', 'Rosacea', 'Seborrh_Keratoses', 'SkinCancer', 'Sun_Sunlight_Damage', 'Tinea', 'Unknown_Normal', 'Vascular_Tumors', 'Vasculitis', 'Vitiligo', 'Warts']
 
 # Charge modèle + historique
-model = tf.keras.models.load_model("https://gitlab.com/hamadrassem-group/hamadrassem-project/-/blob/master/Hamad_Rassem_Mahamat_SkinDiseaseModel.h5")
+model = tf.keras.models.load_model("https://gitlab.com/hamadrassem-group/hamadrassem-project/-/blob/460f2345a18b18a63df496b2f3f533e76dba78cf/Hamad_Rassem_Mahamat_SkinDiseaseModel.h5")
   
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
