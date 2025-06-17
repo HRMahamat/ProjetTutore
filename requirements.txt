@@ -3,5 +3,5 @@ pandas
 plotly
 numpy
 pillow==9.0.0
-tensorflow==2.18.0
+tensorflow==2.11.0
 zipfile
