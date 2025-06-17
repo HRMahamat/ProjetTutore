@@ -36,9 +36,9 @@ CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis
 ZIP_FILENAME = "Hamad_Rassem_Mahamat_SkinDiseaseModel.zip"  
 with zipfile.ZipFile(ZIP_FILENAME, "r") as archive:
     h5_inside = archive.namelist()[0]        
-    target_name = os.path.basename(h5_inside) 
+    """target_name = os.path.basename(h5_inside) 
     archive.extract(h5_inside, path=".")     
-    os.rename(h5_inside, target_name)
+    os.rename(h5_inside, target_name)"""
       
 try:
     with CustomObjectScope({
@@ -54,7 +54,7 @@ try:
         'RandomContrast': RandomContrast,
         'RandomTranslation': RandomTranslation,
         'preprocess_input': preprocess_input
-    }): model = tf.keras.models.load_model(target_name)
+    }): model = tf.keras.models.load_model(h5_inside)
 except: st.stop()
   
 try:
