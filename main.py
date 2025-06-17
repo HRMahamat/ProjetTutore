@@ -35,19 +35,22 @@ CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis
 
 ZIP_FILENAME = "Hamad_Rassem_Mahamat_SkinDiseaseModel.zip"  
 with zipfile.ZipFile(ZIP_FILENAME, "r") as archive:
-    h5_files = [f for f in archive.namelist() if f.lower().endswith(".h5")]
+    all_files = archive.namelist()
+    h5_files = [f for f in all_files if f.lower().endswith(".h5")]
     h5_inside = h5_files[0]
     target_name = os.path.basename(h5_inside)
     with archive.open(h5_inside) as src, open(target_name, "wb") as dst: dst.write(src.read())
       
-with CustomObjectScope({
-    'RandomFlip':        RandomFlip,
-    'RandomRotation':    RandomRotation,
-    'RandomZoom':        RandomZoom,
-    'RandomContrast':    RandomContrast,
-    'RandomTranslation': RandomTranslation,
-    'preprocess_input':  preprocess_input
-}): model = tf.keras.models.load_model(target_name)
+try:
+    with CustomObjectScope({
+        'RandomFlip':        RandomFlip,
+        'RandomRotation':    RandomRotation,
+        'RandomZoom':        RandomZoom,
+        'RandomContrast':    RandomContrast,
+        'RandomTranslation': RandomTranslation,
+        'preprocess_input':  preprocess_input
+    }): model = tf.keras.models.load_model(target_name)
+except: st.stop()
   
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
