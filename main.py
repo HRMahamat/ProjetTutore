@@ -33,10 +33,16 @@ CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis
 ZIP_FILENAME = "Hamad_Rassem_Mahamat_SkinDiseaseModel.zip"  
 with zipfile.ZipFile(ZIP_FILENAME, "r") as archive:
     h5_files = [f for f in archive.namelist() if f.lower().endswith(".h5")]
-    h5_name = h5_files[0]
-    data = archive.read(h5_name)
-    with open(h5_name, "wb") as out_f: out_f.write(data)
-model = tf.keras.models.load_model("Hamad_Rassem_Mahamat_SkinDiseaseModel.h5")
+    if not h5_files: st.error("Pas de fichier .h5 dans le ZIP !"); st.stop()
+    h5_inside = h5_files[0]
+    target_name = os.path.basename(h5_inside)
+    with archive.open(h5_inside) as src, open(target_name, "wb") as dst: dst.write(src.read())
+      
+try: model = tf.keras.models.load_model(target_name)
+except:
+    from tensorflow.keras.applications.efficientnet import preprocess_input
+    from tensorflow.keras.utils import CustomObjectScope
+    with CustomObjectScope({'preprocess_input': preprocess_input}): model = tf.keras.models.load_model(target_name)
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
     history2 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase2.csv")
