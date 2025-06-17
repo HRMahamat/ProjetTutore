@@ -6,7 +6,7 @@ import plotly.express as px
 from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.utils import CustomObjectScope
-from tensorflow.keras.layers import RandomFlip, RandomRotation, RandomZoom, RandomContrast, RandomTranslation
+from tensorflow.keras.layers import InputLayer, Conv2D, MaxPooling2D, Flatten, Dense, Dropout, RandomFlip, RandomRotation, RandomZoom, RandomContrast, RandomTranslation
 from tensorflow.keras.applications.efficientnet import preprocess_input
 
 
@@ -42,12 +42,18 @@ with zipfile.ZipFile(ZIP_FILENAME, "r") as archive:
       
 try:
     with CustomObjectScope({
-        'RandomFlip':        RandomFlip,
-        'RandomRotation':    RandomRotation,
-        'RandomZoom':        RandomZoom,
-        'RandomContrast':    RandomContrast,
+        'InputLayer': InputLayer,
+        'Conv2D': Conv2D,
+        'MaxPooling2D': MaxPooling2D,
+        'Flatten': Flatten,
+        'Dense': Dense,
+        'Dropout': Dropout,
+        'RandomFlip': RandomFlip,
+        'RandomRotation': RandomRotation,
+        'RandomZoom': RandomZoom,
+        'RandomContrast': RandomContrast,
         'RandomTranslation': RandomTranslation,
-        'preprocess_input':  preprocess_input
+        'preprocess_input': preprocess_input
     }): model = tf.keras.models.load_model(target_name)
 except: st.stop()
   
