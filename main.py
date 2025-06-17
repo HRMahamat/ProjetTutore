@@ -1,4 +1,4 @@
-import os, time, request
+import os, time, requests
 import streamlit as st
 import numpy as np
 import pandas as pd
