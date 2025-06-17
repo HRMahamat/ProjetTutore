@@ -5,9 +5,6 @@ import pandas as pd
 import plotly.express as px
 from PIL import Image
 import tensorflow as tf
-from tensorflow.keras.utils import CustomObjectScope
-from tensorflow.keras.layers import InputLayer, Conv2D, MaxPooling2D, Flatten, Dense, Dropout, RandomFlip, RandomRotation, RandomZoom, RandomContrast, RandomTranslation
-from tensorflow.keras.applications.efficientnet import preprocess_input
 
 
 st.set_page_config(page_icon="🩺", page_title="Skin Disease Detection", layout="wide")
@@ -32,31 +29,7 @@ img = (224, 224)
 CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis', 'DrugEruption', 'Eczema', 'Infestations_Bites', 'Lichen', 'Lupus', 'Moles', 'Psoriasis', 'Rosacea', 'Seborrh_Keratoses', 'SkinCancer', 'Sun_Sunlight_Damage', 'Tinea', 'Unknown_Normal', 'Vascular_Tumors', 'Vasculitis', 'Vitiligo', 'Warts']
 
 # Charge modèle + historique
-
-ZIP_FILENAME = "Hamad_Rassem_Mahamat_SkinDiseaseModel.zip"  
-with zipfile.ZipFile(ZIP_FILENAME, "r") as archive:
-    h5_inside = archive.namelist()[0]  
-    print(h5_inside)
-    st.write(h5_inside)
-    target_name = os.path.basename(h5_inside)
-    archive.extract(h5_inside, path=".")
-    os.rename(h5_inside, target_name) 
-      
-try:
-    with CustomObjectScope({
-        'InputLayer': InputLayer,
-        'Conv2D': Conv2D,
-        'MaxPooling2D': MaxPooling2D,
-        'Flatten': Flatten,
-        'Dense': Dense,
-        'Dropout': Dropout,
-        'RandomFlip': RandomFlip,
-        'RandomRotation': RandomRotation,
-        'RandomZoom': RandomZoom,
-        'RandomContrast': RandomContrast,
-        'RandomTranslation': RandomTranslation,
-        'preprocess_input': preprocess_input
-    }): model = tf.keras.models.load_model(target_name)
+try: model = tf.keras.models.load_model("https://drive.google.com/file/d/1zPPtgKxvW1ErfevKvAeSMHmq6-Ine9CU/view?usp=drive_link")
 except: st.stop()
   
 try:
