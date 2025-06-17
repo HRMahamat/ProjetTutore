@@ -5,6 +5,9 @@ import pandas as pd
 import plotly.express as px
 from PIL import Image
 import tensorflow as tf
+from tensorflow.keras.utils import CustomObjectScope
+from tensorflow.keras.layers import RandomFlip, RandomRotation, RandomZoom, RandomContrast, RandomTranslation
+from tensorflow.keras.applications.efficientnet import preprocess_input
 
 
 st.set_page_config(page_icon="🩺", page_title="Skin Disease Detection", layout="wide")
@@ -38,11 +41,15 @@ with zipfile.ZipFile(ZIP_FILENAME, "r") as archive:
     target_name = os.path.basename(h5_inside)
     with archive.open(h5_inside) as src, open(target_name, "wb") as dst: dst.write(src.read())
       
-try: model = tf.keras.models.load_model(target_name)
-except:
-    from tensorflow.keras.applications.efficientnet import preprocess_input
-    from tensorflow.keras.utils import CustomObjectScope
-    with CustomObjectScope({'preprocess_input': preprocess_input}): model = tf.keras.models.load_model(target_name)
+with CustomObjectScope({
+    'RandomFlip':        RandomFlip,
+    'RandomRotation':    RandomRotation,
+    'RandomZoom':        RandomZoom,
+    'RandomContrast':    RandomContrast,
+    'RandomTranslation': RandomTranslation,
+    'preprocess_input':  preprocess_input
+}): model = tf.keras.models.load_model(target_name)
+  
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
     history2 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase2.csv")
