@@ -35,11 +35,10 @@ CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis
 
 ZIP_FILENAME = "Hamad_Rassem_Mahamat_SkinDiseaseModel.zip"  
 with zipfile.ZipFile(ZIP_FILENAME, "r") as archive:
-    all_files = archive.namelist()
-    h5_files = [f for f in all_files]
-    h5_inside = h5_files[0]
-    target_name = os.path.basename(h5_inside)
-    with archive.open(h5_inside) as src, open(target_name, "wb") as dst: dst.write(src.read())
+    h5_inside = archive.namelist()[0]        
+    target_name = os.path.basename(h5_inside) 
+    archive.extract(h5_inside, path=".")     
+    os.rename(h5_inside, target_name)
       
 try:
     with CustomObjectScope({
