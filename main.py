@@ -36,7 +36,6 @@ with zipfile.ZipFile(ZIP_FILENAME, "r") as archive:
     h5_name = h5_files[0]
     data = archive.read(h5_name)
     with open(h5_name, "wb") as out_f: out_f.write(data)
-    st.write(h5_name)
 model = tf.keras.models.load_model("Hamad_Rassem_Mahamat_SkinDiseaseModel.h5")
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
