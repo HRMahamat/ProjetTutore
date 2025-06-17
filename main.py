@@ -30,7 +30,7 @@ CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis
 
 # Charge modèle + historique
 MODEL_URL = "https://gitlab.com/hamadrassem-group/hamadrassem-project/-/raw/460f2345a18b18a63df496b2f3f533e76dba78cf/Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
-LOCAL_MODEL = "model_local.h5"
+LOCAL_MODEL = "Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
 
 if not os.path.exists(LOCAL_MODEL):
     st.info("Téléchargement du modèle…")
