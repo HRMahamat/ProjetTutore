@@ -77,6 +77,13 @@ with tab2:
         picture = Image.open(upload).convert("RGB").resize(img)
         st.image(picture.resize((1000, int((float(picture.size[1]) * float((350 / float(picture.size[0])))))), Image.FILTERED), use_container_width=False)
         x = np.expand_dims(np.array(picture)/255.0, 0)
+        if not os.path.exists(chemin):
+            r = requests.get(MODEL_URL, stream=True)
+            r.raise_for_status()
+            with open(chemin, "wb") as f:
+                for chunk in r.iter_content(chunk_size=1024*1024):
+                    f.write(chunk)
+                    model = tf.keras.models.load_model(chemin)
         preds = model.predict(x)[0]
         top3 = preds.argsort()[::-1][:5]
         st.write("\n\n")
