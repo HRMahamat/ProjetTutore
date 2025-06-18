@@ -40,7 +40,7 @@ if not os.path.exists(LOCAL_MODEL):
         for chunk in r.iter_content(chunk_size=1024*1024):
             f.write(chunk)
 
-model = tf.keras.models.load_model("Hamad_Rassem_Mahamat_SkinDiseaseModeles.h5")
+model = tf.keras.models.load_model("https://drive.google.com/file/d/1zPPtgKxvW1ErfevKvAeSMHmq6-Ine9CU/view?usp=sharing")
   
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
