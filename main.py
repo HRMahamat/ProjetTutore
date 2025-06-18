@@ -29,7 +29,7 @@ img = (224, 224)
 CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis', 'DrugEruption', 'Eczema', 'Infestations_Bites', 'Lichen', 'Lupus', 'Moles', 'Psoriasis', 'Rosacea', 'Seborrh_Keratoses', 'SkinCancer', 'Sun_Sunlight_Damage', 'Tinea', 'Unknown_Normal', 'Vascular_Tumors', 'Vasculitis', 'Vitiligo', 'Warts']
 
 # Charge modèle + historique
-MODEL_URL = "https://drive.usercontent.google.com/u/0/uc?id=1zPPtgKxvW1ErfevKvAeSMHmq6-Ine9CU&export=download"
+MODEL_URL = "https://huggingface.co/spaces/HRM237/depots/resolve/main/Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
 LOCAL_MODEL = "Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
 
 if not os.path.exists(LOCAL_MODEL):
