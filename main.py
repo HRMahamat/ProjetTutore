@@ -5,7 +5,6 @@ import pandas as pd
 import plotly.express as px
 from PIL import Image
 import tensorflow as tf
-from huggingface_hub import hf_hub_download
 
 
 st.set_page_config(page_icon="🩺", page_title="Skin Disease Detection", layout="wide")
@@ -32,14 +31,6 @@ CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis
 # Charge modèle + historique
 MODEL_URL = "https://drive.usercontent.google.com/u/0/uc?id=1zPPtgKxvW1ErfevKvAeSMHmq6-Ine9CU&export=download"
 chemin = "Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
-
-if not os.path.exists(chemin):
-    r = requests.get(MODEL_URL, stream=True)
-    r.raise_for_status()
-    with open(chemin, "wb") as f:
-        for chunk in r.iter_content(chunk_size=1024*1024):
-            f.write(chunk)
-            model = tf.keras.models.load_model(chemin)
   
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
