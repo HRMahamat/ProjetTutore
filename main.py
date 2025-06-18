@@ -67,6 +67,9 @@ with tab2:
     if upload:
         picture = Image.open(upload).convert("RGB").resize(img)
         st.image(picture.resize((1000, int((float(picture.size[1]) * float((350 / float(picture.size[0])))))), Image.FILTERED), use_container_width=False)
+        st.write("\n\n")
+        st.markdown("### 🎯 Top 5 des prédictions pour votre recherche")
+        st.write("\n")
         x = np.expand_dims(np.array(picture)/255.0, 0)
         if not os.path.exists(chemin):
             r = requests.get(MODEL_URL, stream=True)
@@ -74,11 +77,7 @@ with tab2:
             with open(chemin, "wb") as f:
                 for chunk in r.iter_content(chunk_size=1024*1024):
                     f.write(chunk)
-                    preds = tf.keras.models.load_model(chemin).predict(x)[0]
-                    top3 = preds.argsort()[::-1][:5]
-                    st.write("\n\n")
-                    st.markdown("### 🎯 Top 5 des prédictions pour votre recherche")
-                    st.write("\n")
+                    top3 = (tf.keras.models.load_model(chemin).predict(x)[0]).argsort()[::-1][:5]
                     for i in top3: st.write(f"    - **{CLASSES[i]}** — {preds[i]*100}%")
 
 with tab3:
