@@ -79,7 +79,7 @@ with tab2:
                     st.write("\n\n")
                     st.markdown("### 🎯 Top 5 des prédictions pour votre recherche")
                     st.write("\n")
-                     for i in top3: st.write(f"    - **{CLASSES[i]}** — {preds[i]*100}%")
+                    for i in top3: st.write(f"    - **{CLASSES[i]}** — {preds[i]*100}%")
 
 with tab3:
     st.header("🧪 Évaluation sur le jeu Test")
