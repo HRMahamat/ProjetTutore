@@ -77,7 +77,8 @@ with tab2:
             with open(chemin, "wb") as f:
                 for chunk in r.iter_content(chunk_size=1024*1024):
                     f.write(chunk)
-                    top3 = (tf.keras.models.load_model(chemin).predict(x)[0]).argsort()[::-1][:5]
+                    preds = tf.keras.models.load_model(chemin).predict(x)[0]
+                    top3 = preds.argsort()[::-1][:5]
                     for i in top3: st.write(f"    - **{CLASSES[i]}** — {preds[i]*100}%")
 
 with tab3:
