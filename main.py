@@ -27,10 +27,6 @@ img.pulse { animation:pulse 4s infinite; }
 
 img = (224, 224)
 CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis', 'DrugEruption', 'Eczema', 'Infestations_Bites', 'Lichen', 'Lupus', 'Moles', 'Psoriasis', 'Rosacea', 'Seborrh_Keratoses', 'SkinCancer', 'Sun_Sunlight_Damage', 'Tinea', 'Unknown_Normal', 'Vascular_Tumors', 'Vasculitis', 'Vitiligo', 'Warts']
-
-# Charge modèle + historique
-MODEL_URL = "https://drive.usercontent.google.com/u/0/uc?id=1zPPtgKxvW1ErfevKvAeSMHmq6-Ine9CU&export=download"
-chemin = "Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
   
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
@@ -71,6 +67,8 @@ with tab2:
         st.markdown("### 🎯 Top 5 des prédictions pour votre recherche")
         st.write("\n")
         x = np.expand_dims(np.array(picture)/255.0, 0)
+        MODEL_URL = "https://drive.usercontent.google.com/u/0/uc?id=1zPPtgKxvW1ErfevKvAeSMHmq6-Ine9CU&export=download"
+        chemin = "Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
         if not os.path.exists(chemin):
             r = requests.get(MODEL_URL, stream=True)
             r.raise_for_status()
