@@ -74,13 +74,12 @@ with tab2:
             with open(chemin, "wb") as f:
                 for chunk in r.iter_content(chunk_size=1024*1024):
                     f.write(chunk)
-                    model = tf.keras.models.load_model(chemin)
-        preds = model.predict(x)[0]
-        top3 = preds.argsort()[::-1][:5]
-        st.write("\n\n")
-        st.markdown("### 🎯 Top 5 des prédictions pour votre recherche")
-        st.write("\n")
-         for i in top3: st.write(f"    - **{CLASSES[i]}** — {preds[i]*100}%")
+                    preds = tf.keras.models.load_model(chemin).predict(x)[0]
+                    top3 = preds.argsort()[::-1][:5]
+                    st.write("\n\n")
+                    st.markdown("### 🎯 Top 5 des prédictions pour votre recherche")
+                    st.write("\n")
+                     for i in top3: st.write(f"    - **{CLASSES[i]}** — {preds[i]*100}%")
 
 with tab3:
     st.header("🧪 Évaluation sur le jeu Test")
