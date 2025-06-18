@@ -5,6 +5,7 @@ import pandas as pd
 import plotly.express as px
 from PIL import Image
 import tensorflow as tf
+from huggingface_hub import hf_hub_download
 
 
 st.set_page_config(page_icon="🩺", page_title="Skin Disease Detection", layout="wide")
@@ -29,16 +30,10 @@ img = (224, 224)
 CLASSES = ['Acne', 'Actinic_Keratosis', 'Benign_tumors', 'Bullous', 'Candidiasis', 'DrugEruption', 'Eczema', 'Infestations_Bites', 'Lichen', 'Lupus', 'Moles', 'Psoriasis', 'Rosacea', 'Seborrh_Keratoses', 'SkinCancer', 'Sun_Sunlight_Damage', 'Tinea', 'Unknown_Normal', 'Vascular_Tumors', 'Vasculitis', 'Vitiligo', 'Warts']
 
 # Charge modèle + historique
-MODEL_URL = "https://huggingface.co/spaces/HRM237/depots/resolve/main/Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
+MODEL_URL = "HRM237/depots"
 LOCAL_MODEL = "Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
 
-if not os.path.exists(LOCAL_MODEL):
-    st.info("Téléchargement du modèle…")
-    r = requests.get(MODEL_URL, stream=True)
-    r.raise_for_status()
-    with open(LOCAL_MODEL, "wb") as f:
-        for chunk in r.iter_content(chunk_size=1024*1024):
-            f.write(chunk)
+if not os.path.exists(LOCAL_MODEL): hf_hub_download(repo_id=MODEL_URL, filename=LOCAL_MODEL, local_dir=".", repo_type="model")
 
 model = tf.keras.models.load_model(MODEL_URL)
   
