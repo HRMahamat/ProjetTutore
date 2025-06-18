@@ -35,7 +35,7 @@ LOCAL_MODEL = "Hamad_Rassem_Mahamat_SkinDiseaseModel.h5"
 
 if not os.path.exists(LOCAL_MODEL): hf_hub_download(repo_id=MODEL_URL, filename=LOCAL_MODEL, local_dir=".", repo_type="model")
 
-model = tf.keras.models.load_model("https://huggingface.co/spaces/HRM237/depots/blob/main/Hamad_Rassem_Mahamat_SkinDiseaseModel.h5")
+model = tf.keras.models.load_model("http://huggingface.co/spaces/HRM237/depots/blob/main/Hamad_Rassem_Mahamat_SkinDiseaseModel.h5")
   
 try:
     history1 = pd.read_csv("Hamad_Rassem_Mahamat_HistoryPhase1.csv")
